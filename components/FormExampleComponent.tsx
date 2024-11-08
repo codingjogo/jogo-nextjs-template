@@ -65,7 +65,7 @@ const FormExampleComponent = () => {
 					control={form.control}
 					name={"password"}
 					label={"Password"}
-					placeholder={"**********"}
+					placeholder={"●●●●●●"}
 					type={"password"}
 				/>
 
