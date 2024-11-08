@@ -10,17 +10,20 @@ import CustomInput from "./CustomInput";
 import { z } from "zod";
 import { Loader2 } from "lucide-react";
 
-const FormExampleComponent = () => {
+const FormExampleComponent = ({ user } : {
+	user?: z.infer<typeof formSchema>
+}) => {
 	const [isLoading, setIsLoading] = React.useState(false);
 
 	// 1. Define your form.
 	const form = useForm<z.infer<typeof formSchema>>({
 		resolver: zodResolver(formSchema),
-		defaultValues: {
-			username: "",
-			email: "",
-			password: "",
-		},
+		defaultValues: user ? {
+			id: user.id,
+			username: user.username,
+			email: user.email,
+			password: user.password,
+		} : undefined,
 	});
 
 	// 2. Define a submit handler.
@@ -29,7 +32,14 @@ const FormExampleComponent = () => {
 		// ✅ This will be type-safe and validated.
 		try {
 			setIsLoading(true);
+
+			if (user) {
+				// await axios.patch('/api/user/${user.id}, values)
+			} else {
+				// await axios.post('/api/user, values)
+			}
 			console.log(values);
+			
 
 		} catch(error) {
 			if (error instanceof z.ZodError) {
@@ -76,7 +86,7 @@ const FormExampleComponent = () => {
 						</>
 					) : (
 						<>
-							Submit
+							{user ? 'Update user' : 'Create new account'}
 						</>
 					)}
 				</Button>
