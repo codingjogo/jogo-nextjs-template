@@ -7,6 +7,7 @@ export function cn(...inputs: ClassValue[]) {
 }
 
 export const formSchema = z.object({
+  id: z.string().optional(),
   username: z.string().min(1, {
     message: "Username is required"
   }),
