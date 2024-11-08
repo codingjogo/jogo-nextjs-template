@@ -12,7 +12,7 @@ import { Control, FieldPath } from 'react-hook-form'
 import { z } from 'zod'
 import { formSchema } from '@/lib/utils'
 
-interface CustomInput {
+interface CustomInputProps {
     control: Control<z.infer<typeof formSchema>>;
     name: FieldPath<z.infer<typeof formSchema>>;
     label: string;
@@ -24,7 +24,7 @@ const CustomInput = ({control,
     name,
     label,
     placeholder,
-    type}: CustomInput) => {
+    type}: CustomInputProps) => {
   return (
     <FormField
           control={control}
