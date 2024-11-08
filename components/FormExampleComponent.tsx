@@ -8,8 +8,11 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import CustomInput from "./CustomInput";
 import { z } from "zod";
+import { Loader2 } from "lucide-react";
 
 const FormExampleComponent = () => {
+	const [isLoading, setIsLoading] = React.useState(false);
+
 	// 1. Define your form.
 	const form = useForm<z.infer<typeof formSchema>>({
 		resolver: zodResolver(formSchema),
@@ -24,7 +27,19 @@ const FormExampleComponent = () => {
 	function onSubmit(values: z.infer<typeof formSchema>) {
 		// Do something with the form values.
 		// ✅ This will be type-safe and validated.
-		console.log(values);
+		try {
+			setIsLoading(true);
+			console.log(values);
+
+		} catch(error) {
+			if (error instanceof z.ZodError) {
+				console.log("Zod_Valditaion", error)
+			}
+			console.log("Error submitting form", error)
+		} finally {
+			setIsLoading(false);
+            // form.reset();
+		}
 	}
 
 	return (
@@ -54,7 +69,17 @@ const FormExampleComponent = () => {
 					type={"password"}
 				/>
 
-				<Button type="submit">Submit</Button>
+				<Button disabled={isLoading} type="submit">
+					{isLoading ? (
+						<>
+							<Loader2 size={20} className="animate-spin" />&nbsp;Loading...
+						</>
+					) : (
+						<>
+							Submit
+						</>
+					)}
+				</Button>
 			</form>
 		</Form>
 	);
