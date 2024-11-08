@@ -6,12 +6,7 @@ const page = () => {
   return (
     <section className='container mx-auto py-12'>
         <Heading title='Form Example' subTitle='Test subtitle' />
-        <FormExampleComponent user={{
-          id: "test-ID",
-          username: 'sheesh',
-          email: 'sheesh@example.com',
-          password: 'password123',
-        }} />
+        <FormExampleComponent />
     </section>
   )
 }

@@ -10,20 +10,28 @@ import CustomInput from "./CustomInput";
 import { z } from "zod";
 import { Loader2 } from "lucide-react";
 
-const FormExampleComponent = ({ user } : {
-	user?: z.infer<typeof formSchema>
+const FormExampleComponent = ({
+	user,
+}: {
+	user?: z.infer<typeof formSchema>;
 }) => {
 	const [isLoading, setIsLoading] = React.useState(false);
 
 	// 1. Define your form.
 	const form = useForm<z.infer<typeof formSchema>>({
 		resolver: zodResolver(formSchema),
-		defaultValues: user ? {
-			id: user.id,
-			username: user.username,
-			email: user.email,
-			password: user.password,
-		} : undefined,
+		defaultValues: user
+			? {
+					id: user.id,
+					username: user.username,
+					email: user.email,
+					password: user.password,
+			  }
+			: {
+					username: "",
+					email: "",
+					password: "",
+			  },
 	});
 
 	// 2. Define a submit handler.
@@ -39,16 +47,14 @@ const FormExampleComponent = ({ user } : {
 				// await axios.post('/api/user, values)
 			}
 			console.log(values);
-			
-
-		} catch(error) {
+		} catch (error) {
 			if (error instanceof z.ZodError) {
-				console.log("Zod_Valditaion", error)
+				console.log("Zod_Valditaion", error);
 			}
-			console.log("Error submitting form", error)
+			console.log("Error submitting form", error);
 		} finally {
 			setIsLoading(false);
-            // form.reset();
+			// form.reset();
 		}
 	}
 
@@ -82,12 +88,11 @@ const FormExampleComponent = ({ user } : {
 				<Button disabled={isLoading} type="submit">
 					{isLoading ? (
 						<>
-							<Loader2 size={20} className="animate-spin" />&nbsp;Loading...
+							<Loader2 size={20} className="animate-spin" />
+							&nbsp;Loading...
 						</>
 					) : (
-						<>
-							{user ? 'Update user' : 'Create new account'}
-						</>
+						<>{user ? "Update user" : "Create new account"}</>
 					)}
 				</Button>
 			</form>
