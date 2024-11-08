@@ -3,6 +3,9 @@
 import React from 'react'
 import { Form } from './ui/form';
 import { Button } from './ui/button';
+import { formSchema } from '@/lib/utils';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useForm } from 'react-hook-form';
 
 const FormComponent = () => {
     // 1. Define your form.
