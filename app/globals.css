@@ -70,3 +70,14 @@ body {
     @apply bg-background text-foreground;
   }
 }
+
+@layer utilities {
+  /* Typography */
+  .heading-1 {
+    @apply text-3xl lg:text-4xl;
+  }
+
+  .sub-title {
+    @apply text-sm lg:text-base text-gray-600
+  }
+}

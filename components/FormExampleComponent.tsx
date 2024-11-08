@@ -7,8 +7,9 @@ import { formSchema } from "@/lib/utils";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import CustomInput from "./CustomInput";
+import { z } from "zod";
 
-const FormComponent = () => {
+const FormExampleComponent = () => {
 	// 1. Define your form.
 	const form = useForm<z.infer<typeof formSchema>>({
 		resolver: zodResolver(formSchema),
@@ -59,4 +60,4 @@ const FormComponent = () => {
 	);
 };
 
-export default FormComponent;
+export default FormExampleComponent;

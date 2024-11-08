@@ -9,7 +9,7 @@
   - Test the validations
 */
 
-import FormComponent from "@/components/FormComponent";
+import FormComponent from "@/components/FormExampleComponent";
 
 export default function Home() {
   return (
